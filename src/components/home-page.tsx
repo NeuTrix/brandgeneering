@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // Define interface for component props
 interface HeaderProps {
@@ -9,7 +10,23 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <header>
-      <img src="" alt="company log" />
+      <div>
+        <img src="BG-logo2_1.webp" alt="company log" />
+        <h1>BrandGeneering Consulting</h1>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+        </ul>
+      </nav>
       <h1>{title}</h1>
     </header>
   );
@@ -19,18 +36,29 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 const MainContent: React.FC = () => {
   return (
     <main>
-      <h2>Welcome to my home page!</h2>
-      <p>Here you can find all sorts of information about me.</p>
+      <h2>BrandGeneering Consulting</h2>
+      <h3>Marketing, Strategy, and Web Applications</h3>
     </main>
   );
 };
 
-// Define functional component for Footer
-const Footer: React.FC = () => {
+// Define functional component for AboutPage
+const AboutPage: React.FC = () => {
   return (
-    <footer>
-      <p>&copy; 2023 My Home Page</p>
-    </footer>
+    <main>
+      <h2>About Us</h2>
+      <p>We are a marketing and web development agency based in the United States.</p>
+    </main>
+  );
+};
+
+// Define functional component for ContactPage
+const ContactPage: React.FC = () => {
+  return (
+    <main>
+      <h2>Contact Us</h2>
+      <p>You can reach us at info@brandgeneering.com.</p>
+    </main>
   );
 };
 
@@ -45,4 +73,26 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+// Define functional component for Footer
+const Footer: React.FC = () => {
+  return (
+    <footer>
+      <p>&copy; 2023 My Home Page</p>
+    </footer>
+  );
+};
+
+// Define the routes for your application
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
