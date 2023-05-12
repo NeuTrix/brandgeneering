@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     <header>
       <div>
         <img src="BG-logo2_1.webp" alt="company log" />
-        <h1>BrandGeneering Consulting</h1>
+        <h1>BrandGeneering Consulting **`</h1>
       </div>
       <nav>
         <ul>
