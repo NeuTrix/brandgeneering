@@ -1,14 +1,14 @@
-/
+
 
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import SendIcon from '@material-ui/icons/Send';
-import axios from 'axios';
-import { useForm } from 'react-hook-form';
+// import SendIcon from '@material-ui/icons/Send';
+// import axios from 'axios';
+// import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from 'react-toastify';
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,16 +26,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+interface IFormState {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+
 const ContactForm = () => {
   const classes = useStyles();
-  const [formState, setFormState] = useState({});
-  const { handleSubmit, form } = useForm();
+  const [formState, setFormState] = useState<IFormState>({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
 
-  const handleChange = (event) => {
-    setFormState({
-      ...formState,
-      [event.target.name]: event.target.value,
-    });
+  // const { handleSubmit, form } = useForm();
+
+  const handleChange = (event: React.ChangeEvent) => {
+    console.log('===> in handleChange', { event }); // ******
+    // setFormState({
+    //   ...formState,
+    //   [event.target.name]: event.target.value,
+    // });
   };
 
   const validateForm = () => {
@@ -48,30 +63,31 @@ const ContactForm = () => {
     return schema.validate(formState);
   };
 
-  const handleSubmitForm = async (event) => {
+  const handleSubmitForm = async (event: React.ChangeEvent) => {
     event.preventDefault();
-    const errors = validateForm();
-    if (errors) {
-      return toast('Please correct the errors in the form.', { type: 'error' });
-    }
-    const { name, email, subject, message } = formState;
-    try {
-      await axios.post('https://example.com/contact', {
-        name,
-        email,
-        subject,
-        message,
-      });
-      toast('Your message has been sent.', { type: 'success' });
-      setFormState({});
-    } catch (error) {
-      toast('There was an error sending your message.', { type: 'error' });
-    }
+    console.log({ event });///
+    // const errors = validateForm();
+    // if (errors) {
+    //   return toast('Please correct the errors in the form.', { type: 'error' });
+    // }
+    // const { name, email, subject, message } = formState;
+    // try {
+    //   await axios.post('https://example.com/contact', {
+    //     name,
+    //     email,
+    //     subject,
+    //     message,
+    //   });
+    //   toast('Your message has been sent.', { type: 'success' });
+    //   setFormState({});
+    // } catch (error) {
+    //   toast('There was an error sending your message.', { type: 'error' });
+    // }
   };
 
   return (
     <div className={classes.container}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={() => null}>
         <div className={classes.form}>
           <TextField
             label="Name"
