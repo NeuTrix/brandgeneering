@@ -1,6 +1,6 @@
 import React from "react";
-import { Footer, Header } from '../../components';
-import { MainContent } from '../index';
+import { Footer, Header } from 'components';
+import { MainContent } from 'pages';
 
 // Define functional component for HomePage that includes Header, MainContent, and Footer
 const HomePage: React.FC = () => {
