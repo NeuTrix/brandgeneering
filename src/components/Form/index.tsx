@@ -45,12 +45,14 @@ const ContactForm = () => {
 
   // const { handleSubmit, form } = useForm();
 
-  const handleChange = (event: React.ChangeEvent) => {
-    console.log('===> in handleChange', { event }); // ******
-    // setFormState({
-    //   ...formState,
-    //   [event.target.name]: event.target.value,
-    // });
+  const handleChange = (event: any) => {
+    let { name, value } = event.target;
+    // 
+    console.log('===> in handleChange', { name, value, formState }); // ******
+    setFormState({
+      ...formState,
+      [name]: value,
+    })
   };
 
   const validateForm = () => {
@@ -63,55 +65,41 @@ const ContactForm = () => {
     return schema.validate(formState);
   };
 
-  const handleSubmitForm = async (event: React.ChangeEvent) => {
+  const handleSubmitForm = async (event: any) => {
+    console.log("==>", { formState });///
     event.preventDefault();
-    console.log({ event });///
-    // const errors = validateForm();
-    // if (errors) {
-    //   return toast('Please correct the errors in the form.', { type: 'error' });
-    // }
-    // const { name, email, subject, message } = formState;
-    // try {
-    //   await axios.post('https://example.com/contact', {
-    //     name,
-    //     email,
-    //     subject,
-    //     message,
-    //   });
-    //   toast('Your message has been sent.', { type: 'success' });
-    //   setFormState({});
-    // } catch (error) {
-    //   toast('There was an error sending your message.', { type: 'error' });
-    // }
+
   };
+
+  const { name, email, subject, message } = formState;
 
   return (
     <div className={classes.container}>
-      <form onSubmit={() => null}>
+      <form onSubmit={handleSubmitForm}>
         <div className={classes.form}>
           <TextField
             label="Name"
             name="name"
-            value={formState.name}
+            value={name}
             onChange={handleChange}
             autoFocus
           />
           <TextField
             label="Email"
             name="email"
-            value={formState.email}
+            value={email}
             onChange={handleChange}
           />
           <TextField
             label="Subject"
             name="subject"
-            value={formState.subject}
+            value={subject}
             onChange={handleChange}
           />
           <TextField
             label="Message"
             name="message"
-            value={formState.message}
+            value={message}
             onChange={handleChange}
             multiline
           />
