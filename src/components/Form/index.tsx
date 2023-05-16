@@ -33,7 +33,6 @@ interface IFormState {
   message: string;
 }
 
-
 const ContactForm = () => {
   const classes = useStyles();
   const [formState, setFormState] = useState<IFormState>({
@@ -68,7 +67,6 @@ const ContactForm = () => {
   const handleSubmitForm = async (event: any) => {
     console.log("==>", { formState });///
     event.preventDefault();
-
   };
 
   const { name, email, subject, message } = formState;
